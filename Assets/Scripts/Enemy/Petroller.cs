@@ -42,4 +42,11 @@ public class Petroller : MonoBehaviour
         }
         transform.LookAt(waypoints[waypointIndex].position);
     }
+
+    public static void EnemeyGotoSandal(GameObject Tes)
+    {
+        Tes.transform.LookAt(Attack.SelectedSandal.transform.position);
+        //Here "2" is speed
+        Tes.transform.Translate(Vector3.forward * 2 * Time.deltaTime);   
+    }
 }
