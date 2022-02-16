@@ -6,7 +6,6 @@ public class Petroller : MonoBehaviour
 {
     public Transform[] waypoints;
     public int speed;
-
     private int waypointIndex;
     private float dist;
 
@@ -33,7 +32,7 @@ public class Petroller : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    void IncreaseIndex()
+    public void IncreaseIndex()
     {
         waypointIndex++;
         if (waypointIndex >= waypoints.Length)
@@ -47,6 +46,18 @@ public class Petroller : MonoBehaviour
     {
         Tes.transform.LookAt(Attack.SelectedSandal.transform.position);
         //Here "2" is speed
-        Tes.transform.Translate(Vector3.forward * 2 * Time.deltaTime);   
+        Tes.transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+        /*if (Vector3.Distance(Tes.transform.position, Attack.SelectedSandal.transform.position) < 1f)
+        {
+            Tes.transform.Rotate(0, 0, 0);
+        }*/
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Sandal")
+        {
+            this.gameObject.transform.LookAt(waypoints[waypointIndex].position);
+        }
     }
 }
