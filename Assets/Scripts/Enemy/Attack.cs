@@ -7,10 +7,11 @@ public class Attack : MonoBehaviour
     public GameObject[] Sandals;
     public GameObject[] Enemies;
     public static GameObject SelectedSandal;
-    /*For Finding First Shortest 
+    //For Finding First Shortest 
     private float Distance;
     private float min = 1000;
-    public static GameObject selectedSandal;*/
+    private int selectedEnemyIndex=0;
+    //public static GameObject selectedSandal;
 
     /*For Finding Second Shortest 
     public static GameObject selectedSandal2;*/
@@ -26,9 +27,9 @@ public class Attack : MonoBehaviour
     {
         if (Input.GetButtonDown("Horizontal"))
         {
-            //CalculateShortDistance();
-            ChooseRandomSandle();
-            RandomEnemySelect();
+            CalculateShortDistance();
+            //RandomEnemySelect();
+            //ChooseRandomSandle();
         }
     }
 
@@ -38,7 +39,7 @@ public class Attack : MonoBehaviour
     /// In "GetComponent<Renderer>().material.SetColor("_Color", Color.green);" It changes color of selected Chapals.
     /// </summary>
 
-    void ChooseRandomSandle()
+    /*void ChooseRandomSandle()
     {
         int HowManySandals = Random.Range(1,4);
         bool OnlyOnce=true;
@@ -54,26 +55,34 @@ public class Attack : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
-    void RandomEnemySelect()
+    /*void RandomEnemySelect()
     {
-        int selectedEnemy = Random.Range(0, Enemies.Length);
-        Petroller.EnemeyGotoSandal(Enemies[selectedEnemy]);
-    }
-
-    /*void CalculateShortDistance()
+        selectedEnemyIndex = Random.Range(0, Enemies.Length);
+        Petroller.EnemeyGotoSandal(Enemies[selectedEnemyIndex]);
+    }*/
+    
+    void CalculateShortDistance()
     {
+        selectedEnemyIndex = Random.Range(0, Enemies.Length);
+        int selectedSandalIndex = 0;
         for (int a = 0; a < Sandals.Length; a++)
         {
-            Distance = Vector3.Distance(Sandals[a].transform.position, this.transform.position);
+            Distance = Vector3.Distance(Sandals[a].transform.position, Enemies[selectedEnemyIndex].transform.position);
             if (Distance < min)
             {
                 min = Distance;
-                selectedSandal = Sandals[a];
+                selectedSandalIndex = a;
             }
         }
-        float min1 = 1000;
+        //Debug.Log(min);
+        //Debug.Log(SelectedSandal);
+        SelectedSandal = Sandals[selectedSandalIndex];
+        Petroller.EnemeyGotoSandal(Enemies[selectedEnemyIndex]);
+        min = 1000;
+        Distance = 0;
+        /*float min1 = 1000;
         float Distance1;
         for (int a = 0; a < Sandals.Length; a++)
         {
@@ -83,11 +92,11 @@ public class Attack : MonoBehaviour
                 min1 = Distance1;
                 selectedSandal2 = Sandals[a];
             }
-        }
+        }*/
 
-        Debug.Log(min);
-        Debug.Log(min1);
-        Debug.Log(selectedSandal);
-        Debug.Log(selectedSandal2);
-    }*/
+        //Debug.Log(min);
+        //Debug.Log(min1);
+        //Debug.Log(SelectedSandal);
+        //Debug.Log(selectedSandal2);
+    }
 }
