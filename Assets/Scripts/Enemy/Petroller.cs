@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Petroller : MonoBehaviour
@@ -8,6 +9,7 @@ public class Petroller : MonoBehaviour
     public int speed;
     private int waypointIndex;
     private float dist;
+    public GameObject Hand;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +59,17 @@ public class Petroller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Sandal")
         {
+            GameObject ToBePickedSandal = collision.gameObject;
             this.gameObject.transform.LookAt(waypoints[waypointIndex].position);
+
+            //PickWeapon
+            ToBePickedSandal.transform.position = Hand.transform.position;
+            ToBePickedSandal.transform.parent = Hand.transform;
+            ToBePickedSandal.GetComponent<SphereCollider>().isTrigger = true;
+            //ToBePickedSandal.GetComponent<Rigidbody>().isKinematic=true;
+
+            //Destroying Picked Sandal
+            Destroy(ToBePickedSandal, 2f);
         }
     }
 }

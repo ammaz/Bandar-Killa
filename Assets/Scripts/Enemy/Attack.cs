@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public GameObject[] Sandals;
-    public GameObject[] Enemies;
+    private GameObject[] Sandals;
+    private GameObject[] Enemies;
+
     public static GameObject SelectedSandal;
+
     //For Finding First Shortest 
     private float Distance;
     private float min = 1000;
-    private int selectedEnemyIndex=0;
+
+
+    private int selectedEnemyIndex;
+    private int RandomE=0;
+
+    //private bool OnlyOnce=false;
     //public static GameObject selectedSandal;
 
     /*For Finding Second Shortest 
@@ -19,7 +26,8 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
- 
+        Sandals = GameObject.FindGameObjectsWithTag("Sandal");
+        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     // Update is called once per frame
@@ -65,38 +73,43 @@ public class Attack : MonoBehaviour
     
     void CalculateShortDistance()
     {
-        selectedEnemyIndex = Random.Range(0, Enemies.Length);
-        int selectedSandalIndex = 0;
-        for (int a = 0; a < Sandals.Length; a++)
+        //Choosing Random Enemy who will pick the sandal
+        while (selectedEnemyIndex == RandomE)
         {
-            Distance = Vector3.Distance(Sandals[a].transform.position, Enemies[selectedEnemyIndex].transform.position);
-            if (Distance < min)
-            {
-                min = Distance;
-                selectedSandalIndex = a;
-            }
+            RandomE = Random.Range(0, Enemies.Length);
         }
-        //Debug.Log(min);
-        //Debug.Log(SelectedSandal);
-        SelectedSandal = Sandals[selectedSandalIndex];
-        Petroller.EnemeyGotoSandal(Enemies[selectedEnemyIndex]);
-        min = 1000;
-        Distance = 0;
-        /*float min1 = 1000;
-        float Distance1;
-        for (int a = 0; a < Sandals.Length; a++)
-        {
-            Distance1 = Vector3.Distance(selectedSandal.transform.position, Sandals[a].transform.position);
-            if (Distance1 < min1 && Distance1!=0)
-            {
-                min1 = Distance1;
-                selectedSandal2 = Sandals[a];
-            }
-        }*/
 
-        //Debug.Log(min);
-        //Debug.Log(min1);
-        //Debug.Log(SelectedSandal);
-        //Debug.Log(selectedSandal2);
-    }
+        if (selectedEnemyIndex != RandomE)
+        {
+            selectedEnemyIndex = RandomE;
+
+            //Reseting Selected Sandal Index
+            int selectedSandalIndex = 0;
+
+            //Loop to find minimum distance to choose the nearest sandal
+            for (int a = 0; a < Sandals.Length; a++)
+            {
+                if (Sandals[a] != null)
+                {
+                    Distance = Vector3.Distance(Sandals[a].transform.position, Enemies[selectedEnemyIndex].transform.position);
+                    if (Distance < min)
+                    {
+                        min = Distance;
+                        selectedSandalIndex = a;
+                    }
+                }
+            }
+
+            //Setting SelectedSandal for the player to chase it
+            SelectedSandal = Sandals[selectedSandalIndex];
+            Sandals[selectedSandalIndex] = null;
+            Petroller.EnemeyGotoSandal(Enemies[selectedEnemyIndex]);
+
+            //Changing color of selected sandal
+            SelectedSandal.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
+            //Reseting Min Distance Value
+            min = 1000;
+        }         
+    }             
 }
