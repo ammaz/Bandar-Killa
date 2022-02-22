@@ -7,6 +7,8 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animation;
+    //public Behaviour PlayerController1;
     private NavMeshAgent myNavMeshAgent;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,13 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             ClicktoMove();
         }
+        /*if(animation.GetBool("IsAttack")){
+            PlayerController1.enabled = false;
+        }
+        if(animation.GetBool("IsAttack")){
+            Debug.Log("test");
+            PlayerController1.enabled = true;
+        }*/
     }
 
     private void ClicktoMove()
@@ -30,8 +39,18 @@ public class PlayerController : MonoBehaviour
         if (hasHit)
         {
             SetDestination(hit.point);
+            animation.SetBool("IsIdle", false);
+            animation.SetBool("IsRunning", true);
+            animation.SetBool("IsAttack", false);
+        }
+        else
+        {
+            animation.SetBool("IsIdle", true);
+            animation.SetBool("IsRunning", false);
+            animation.SetBool("IsAttack", false);
         }
     }
+
     private void SetDestination(Vector3 target)
     {
         myNavMeshAgent.SetDestination(target);
