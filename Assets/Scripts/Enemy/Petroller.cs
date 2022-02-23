@@ -65,7 +65,7 @@ public class Petroller : MonoBehaviour
             //PickWeapon
             ToBePickedSandal.transform.position = Hand.transform.position;
             ToBePickedSandal.transform.parent = Hand.transform;
-            ToBePickedSandal.GetComponent<SphereCollider>().isTrigger = true;
+            //ToBePickedSandal.GetComponent<BoxCollider>().isTrigger = true;
             //ToBePickedSandal.GetComponent<Rigidbody>().isKinematic=true;
 
             //Destroying Picked Sandal
