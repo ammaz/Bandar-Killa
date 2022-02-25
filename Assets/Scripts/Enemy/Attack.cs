@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Attack : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Attack : MonoBehaviour
     private int selectedEnemyIndex;
     private int RandomE=0;
 
+    //For Sandal Text
+    public Text SandalCount;
+
     //private bool OnlyOnce=false;
     //public static GameObject selectedSandal;
 
@@ -28,6 +32,7 @@ public class Attack : MonoBehaviour
     {
         Sandals = GameObject.FindGameObjectsWithTag("Sandal");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        SandalCount.text = ""+Sandals.Length;
     }
 
     // Update is called once per frame
@@ -39,6 +44,9 @@ public class Attack : MonoBehaviour
             //RandomEnemySelect();
             //ChooseRandomSandle();
         }
+
+        //Updating Sandal Text
+        SandalCount.text = "" + GameObject.FindGameObjectsWithTag("Sandal").Length;
     }
 
     /// <summary>
@@ -108,7 +116,6 @@ public class Attack : MonoBehaviour
             //Changing color of selected sandal
             SelectedSandal.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-            //Reseting Min Distance Value
             min = 1000;
         }         
     }             
