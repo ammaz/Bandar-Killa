@@ -24,6 +24,7 @@ public class ObjectCollider : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            //transform.LookAt(other.gameObject.transform.position);
             anim.SetBool("IsAttack",true);
             anim.SetBool("IsIdle", false);
             anim.SetBool("IsRunning",false);

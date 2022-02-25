@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public Animator animation;
-    public Touch myTouch;
+    //public Touch myTouch;
     //public Behaviour PlayerController1;
     private NavMeshAgent myNavMeshAgent;
     // Start is called before the first frame update
@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.touchCount > 0){
+        if(Input.GetMouseButtonDown(0)){
             ClicktoMove();
         }
+        
         /*if(animation.GetBool("IsAttack")){
             PlayerController1.enabled = false;
         }
@@ -34,8 +35,8 @@ public class PlayerController : MonoBehaviour
 
     private void ClicktoMove()
     {
-        myTouch = Input.GetTouch(0);
-        Ray ray = Camera.main.ScreenPointToRay(myTouch.position);
+        //myTouch = Input.GetTouch(0);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         bool hasHit = Physics.Raycast(ray, out hit);
         if (hasHit)
