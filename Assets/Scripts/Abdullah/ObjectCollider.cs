@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectCollider : MonoBehaviour
 {
+    public ParticleSystem boom;
     Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class ObjectCollider : MonoBehaviour
             anim.SetBool("IsAttack",false);
             anim.SetBool("IsIdle",true);
             yield return null;
+            boom.Play();
             //Destroy(other.gameObject);
         }
     }

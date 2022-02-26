@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animation;
     //public Touch myTouch;
-    //public Behaviour PlayerController1;
     private NavMeshAgent myNavMeshAgent;
     // Start is called before the first frame update
     void Start()
@@ -23,14 +22,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             ClicktoMove();
         }
-        
-        /*if(animation.GetBool("IsAttack")){
-            PlayerController1.enabled = false;
-        }
-        if(animation.GetBool("IsAttack")){
-            Debug.Log("test");
-            PlayerController1.enabled = true;
-        }*/
     }
 
     private void ClicktoMove()
