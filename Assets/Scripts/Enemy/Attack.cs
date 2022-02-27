@@ -22,6 +22,9 @@ public class Attack : MonoBehaviour
     //For Sandal Text
     public Text SandalCount;
 
+    //Attack function running
+    private bool AttackFuncRunning=false;
+
     //private bool OnlyOnce=false;
     //public static GameObject selectedSandal;
 
@@ -40,11 +43,16 @@ public class Attack : MonoBehaviour
     void Update()
     {
         //Calling Enemy
-        if (Input.GetButtonDown("Horizontal"))
+        /*if (Input.GetButtonDown("Horizontal"))
         {
             CalculateShortDistance();
             //RandomEnemySelect();
             //ChooseRandomSandle();
+        }*/
+
+        if (AttackFuncRunning == false)
+        {
+            StartCoroutine(CalculateShortDistance());
         }
 
         //Updating Sandal Text
@@ -84,8 +92,13 @@ public class Attack : MonoBehaviour
         Petroller.EnemeyGotoSandal(Enemies[selectedEnemyIndex]);
     }*/
     
-    void CalculateShortDistance()
+    IEnumerator CalculateShortDistance()
     {
+        AttackFuncRunning = true;
+
+        //Here I can change Range based of difficulty
+        yield return new WaitForSeconds(Random.Range(5,10));
+
         //Choosing Random Enemy who will pick the sandal
         while (selectedEnemyIndex == RandomE)
         {
@@ -122,6 +135,7 @@ public class Attack : MonoBehaviour
             SelectedSandal.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
             min = 1000;
-        }         
+        }
+        AttackFuncRunning = false;
     }
 }
