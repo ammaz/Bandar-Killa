@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Attack : MonoBehaviour
 {
+    //Change for reply
     private GameObject[] Sandals;
     private GameObject[] Enemies;
 
@@ -38,6 +39,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Calling Enemy
         if (Input.GetButtonDown("Horizontal"))
         {
             CalculateShortDistance();
@@ -46,7 +48,10 @@ public class Attack : MonoBehaviour
         }
 
         //Updating Sandal Text
-        SandalCount.text = "" + GameObject.FindGameObjectsWithTag("Sandal").Length;
+        if (int.Parse(SandalCount.text) != GameObject.FindGameObjectsWithTag("Sandal").Length)
+        {
+            SandalCount.text = "" + GameObject.FindGameObjectsWithTag("Sandal").Length;
+        }
     }
 
     /// <summary>
@@ -118,5 +123,5 @@ public class Attack : MonoBehaviour
 
             min = 1000;
         }         
-    }             
+    }
 }

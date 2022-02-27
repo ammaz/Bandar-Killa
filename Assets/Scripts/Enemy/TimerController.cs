@@ -5,39 +5,48 @@ using UnityEngine.UI;
 
 public class TimerController : MonoBehaviour
 {
-    private GameObject textDisplay;
-    public int secondsLeft = 30;
-    public bool takingAway = false;
+    //Change for reply
+    public float timeValue = 90;
+    public Text timeText;
 
-    // Start is called before the first frame update
+    private GameManagerScript gameManager;
     void Start()
     {
-        textDisplay = this.gameObject;
-        textDisplay.GetComponent<Text>().text = "00:" + secondsLeft;
+        gameManager = FindObjectOfType<GameManagerScript>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if (takingAway == false && secondsLeft > 0)
+        if (!GameManagerScript.GameOverCheck)
         {
-            StartCoroutine(TimerTake());
-        }
+            if (timeValue > 0)
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else
+            {
+                timeValue = 0;
+                gameManager.Victory();
+            }
+
+            DisplayTime(timeValue);
+        }  
     }
 
-    IEnumerator TimerTake()
+    void DisplayTime(float timeToDisplay)
     {
-        takingAway = true;
-        yield return new WaitForSeconds(1);
-        secondsLeft -= 1;
-        if (secondsLeft < 10)
+        if (timeToDisplay < 0)
         {
-            textDisplay.GetComponent<Text>().text = "00:0" + secondsLeft;
+            timeToDisplay = 0;
         }
-        else
+
+        else if (timeToDisplay > 0)
         {
-            textDisplay.GetComponent<Text>().text = "00:" + secondsLeft;
+            timeToDisplay += 1;
         }
-        takingAway = false;
+
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
