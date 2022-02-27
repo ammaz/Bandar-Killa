@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Attack : MonoBehaviour
 {
+    //Change for reply
     private GameObject[] Sandals;
     private GameObject[] Enemies;
 
@@ -20,6 +21,9 @@ public class Attack : MonoBehaviour
 
     //For Sandal Text
     public Text SandalCount;
+
+    //Attack function running
+    private bool AttackFuncRunning=false;
 
     //private bool OnlyOnce=false;
     //public static GameObject selectedSandal;
@@ -38,15 +42,24 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Horizontal"))
+        //Calling Enemy
+        /*if (Input.GetButtonDown("Horizontal"))
         {
             CalculateShortDistance();
             //RandomEnemySelect();
             //ChooseRandomSandle();
+        }*/
+
+        if (AttackFuncRunning == false)
+        {
+            StartCoroutine(CalculateShortDistance());
         }
 
         //Updating Sandal Text
-        SandalCount.text = "" + GameObject.FindGameObjectsWithTag("Sandal").Length;
+        if (int.Parse(SandalCount.text) != GameObject.FindGameObjectsWithTag("Sandal").Length)
+        {
+            SandalCount.text = "" + GameObject.FindGameObjectsWithTag("Sandal").Length;
+        }
     }
 
     /// <summary>
@@ -79,8 +92,13 @@ public class Attack : MonoBehaviour
         Petroller.EnemeyGotoSandal(Enemies[selectedEnemyIndex]);
     }*/
     
-    void CalculateShortDistance()
+    IEnumerator CalculateShortDistance()
     {
+        AttackFuncRunning = true;
+
+        //Here I can change Range based of difficulty
+        yield return new WaitForSeconds(Random.Range(5,10));
+
         //Choosing Random Enemy who will pick the sandal
         while (selectedEnemyIndex == RandomE)
         {
@@ -117,6 +135,7 @@ public class Attack : MonoBehaviour
             SelectedSandal.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
             min = 1000;
-        }         
-    }             
+        }
+        AttackFuncRunning = false;
+    }
 }
