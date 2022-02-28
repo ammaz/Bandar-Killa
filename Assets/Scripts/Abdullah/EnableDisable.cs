@@ -19,7 +19,6 @@ public class EnableDisable : MonoBehaviour
             PlayerController1.enabled = false;
         }
         if(animation.GetBool("IsAttack")){
-            Debug.Log("test");
             PlayerController1.enabled = true;
         }
     }
