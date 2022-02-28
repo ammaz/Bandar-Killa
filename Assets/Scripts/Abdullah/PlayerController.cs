@@ -8,8 +8,7 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public Animator animation;
-    //public bool isCheck = true;
-    //public Touch myTouch;
+    public Touch myTouch;
     private NavMeshAgent myNavMeshAgent;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +19,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.touchCount > 0){
             ClicktoMove();
         }
         animation.SetFloat("Speed", myNavMeshAgent.velocity.magnitude);
@@ -28,8 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void ClicktoMove()
     {
-        //myTouch = Input.GetTouch(0);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        myTouch = Input.GetTouch(0);
+        Ray ray = Camera.main.ScreenPointToRay(myTouch.position);
         RaycastHit hit;
         bool hasHit = Physics.Raycast(ray, out hit);
         if (hasHit)
