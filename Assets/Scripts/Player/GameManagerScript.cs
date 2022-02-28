@@ -69,11 +69,15 @@ public class GameManagerScript : MonoBehaviour
 
     public void Home()
     {
+        GameOverCheck = false;
+        VictoryCheck = false;
         SceneManager.LoadScene("MainMenu");
     }
 
     public void Replay()
     {
+        GameOverCheck = false;
+        VictoryCheck = false;
         SceneManager.LoadScene("Level1");
     }
 
@@ -84,21 +88,29 @@ public class GameManagerScript : MonoBehaviour
 
     public void Replay2()
     {
+        GameOverCheck = false;
+        VictoryCheck = false;
         SceneManager.LoadScene("Level2");
     }
 
     public void Replay3()
     {
+        GameOverCheck = false;
+        VictoryCheck = false;
         SceneManager.LoadScene("Level3");
     }
 
     public void Replay4()
     {
+        GameOverCheck = false;
+        VictoryCheck = false;
         SceneManager.LoadScene("Level4");
     }
 
     public void Replay5()
     {
+        GameOverCheck = false;
+        VictoryCheck = false;
         SceneManager.LoadScene("Level5");
     }
 }
