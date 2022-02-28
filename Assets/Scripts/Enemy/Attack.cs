@@ -50,7 +50,7 @@ public class Attack : MonoBehaviour
             //ChooseRandomSandle();
         }*/
 
-        if (AttackFuncRunning == false && !GameManagerScript.VictoryCheck)
+        if (AttackFuncRunning == false && (!GameManagerScript.VictoryCheck || !GameManagerScript.GameOverCheck))
         {
             StartCoroutine(CalculateShortDistance());
         }
@@ -99,6 +99,9 @@ public class Attack : MonoBehaviour
         //Here I can change Range based of difficulty
         yield return new WaitForSeconds(Random.Range(5,10));
 
+        if (GameManagerScript.VictoryCheck || GameManagerScript.GameOverCheck)
+            yield break;
+
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         //Choosing Random Enemy who will pick the sandal
@@ -116,8 +119,8 @@ public class Attack : MonoBehaviour
         }
         
 
-        /*if (selectedEnemyIndex != RandomE)
-        {*/
+        if (!GameManagerScript.VictoryCheck || !GameManagerScript.GameOverCheck)
+        {
             selectedEnemyIndex = RandomE;
 
             //Reseting Selected Sandal Index
@@ -146,7 +149,7 @@ public class Attack : MonoBehaviour
             SelectedSandal.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
             min = 1000;
-        //}
+        }
         AttackFuncRunning = false;
     }
 }
