@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -64,5 +65,40 @@ public class GameManagerScript : MonoBehaviour
          VictoryCheck = true;
 
          VictoryPanel.SetActive(true);
+    }
+
+    public void Home()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Replay2()
+    {
+        SceneManager.LoadScene("Level2");
+    }
+
+    public void Replay3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+
+    public void Replay4()
+    {
+        SceneManager.LoadScene("Level4");
+    }
+
+    public void Replay5()
+    {
+        SceneManager.LoadScene("Level5");
     }
 }
