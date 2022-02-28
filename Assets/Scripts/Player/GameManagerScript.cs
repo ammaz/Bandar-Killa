@@ -15,6 +15,7 @@ public class GameManagerScript : MonoBehaviour
 
     //Change for reply
     public static bool GameOverCheck=false;
+    public static bool VictoryCheck = false;
 
     public Text GameOverTimeText;
 
@@ -59,6 +60,9 @@ public class GameManagerScript : MonoBehaviour
     {
          VictorySandalText.text = "" + GameObject.FindGameObjectsWithTag("Sandal").Length;
          GameplayPanel.SetActive(false);
+
+         VictoryCheck = true;
+
          VictoryPanel.SetActive(true);
     }
 }
