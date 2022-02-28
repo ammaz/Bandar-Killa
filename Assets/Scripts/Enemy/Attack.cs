@@ -37,6 +37,8 @@ public class Attack : MonoBehaviour
         Sandals = GameObject.FindGameObjectsWithTag("Sandal");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         SandalCount.text = ""+Sandals.Length;
+        GameManagerScript.VictoryCheck = false;
+        GameManagerScript.GameOverCheck = false;
     }
 
     // Update is called once per frame
